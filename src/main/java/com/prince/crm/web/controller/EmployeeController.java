@@ -5,8 +5,6 @@ import com.prince.crm.page.EmployeeQueryResult;
 import com.prince.crm.query.EmployeeQueryObject;
 import com.prince.crm.service.EmployeeService;
 import com.prince.crm.util.UserSession;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -43,7 +41,7 @@ public class EmployeeController {
         } else {
             result.put("success", false);
             result.put("msg", "账号或密码错误");
-            logger.info("/login ===> 用户{" + username + ": " + password +  "}登录失败！");
+            logger.info("/login ===> 用户{" + username + ": " + password + "}登录失败！");
         }
 
         return result;
@@ -55,6 +53,26 @@ public class EmployeeController {
         EmployeeQueryResult list = employeeService.getEmployeeList(queryObject);
 
         return list;
+    }
+
+    /**
+     * 更新员工信息
+     *
+     * @param employee 员工信息
+     */
+    @RequestMapping("/employee_update")
+    public void updateEmployee(Employee employee) {
+        employeeService.updateByPrimaryKey(employee);
+    }
+
+    /**
+     * 增加一个新的员工
+     *
+     * @param employee 增加的员工信息
+     */
+    @RequestMapping("/employee_save")
+    public void addEmployee(Employee employee) {
+        employeeService.updateByPrimaryKey(employee);
     }
 
 

@@ -1,11 +1,10 @@
-package com.prince.crm.mapper;
+package com.prince.crm.service;
 
 import com.prince.crm.domain.Department;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
-public interface DepartmentMapper {
+public interface DepartmentService {
     int deleteByPrimaryKey(Long id);
 
     int insert(Department record);
