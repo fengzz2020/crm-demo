@@ -1,5 +1,7 @@
 package com.prince.crm.domain;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.util.Date;
 
 public class Employee {
@@ -17,6 +19,7 @@ public class Employee {
 
     private Department dept;
 
+    @JsonFormat(pattern = "yyyy-MM-dd", timezone = "GMT+8")
     private Date inputtime;
 
     private Boolean state;
