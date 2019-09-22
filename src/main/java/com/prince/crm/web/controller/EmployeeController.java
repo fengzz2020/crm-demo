@@ -27,6 +27,13 @@ public class EmployeeController {
     @Autowired
     private EmployeeService employeeService;
 
+    /**
+     * 登陆
+     * @param username 用户名
+     * @param password 密码
+     * @param session session会话
+     * @return 结果信息
+     */
     @RequestMapping("/login")
     @ResponseBody
     public Map<String, Object> login(String username, String password, HttpSession session) {
@@ -47,12 +54,17 @@ public class EmployeeController {
         return result;
     }
 
+    /**
+     * 查询员工列表
+     *
+     * @param queryObject 查询条件（分页）
+     * @return 员工列表
+     */
     @RequestMapping("/employee_list")
     @ResponseBody
     public EmployeeQueryResult queryEmployList(EmployeeQueryObject queryObject) {
-        EmployeeQueryResult list = employeeService.getEmployeeList(queryObject);
 
-        return list;
+        return employeeService.getEmployeeList(queryObject);
     }
 
     /**
@@ -71,8 +83,26 @@ public class EmployeeController {
      * @param employee 增加的员工信息
      */
     @RequestMapping("/employee_save")
-    public void addEmployee(Employee employee) {
-        employeeService.updateByPrimaryKey(employee);
+    @ResponseBody
+    public Map<String, Object> addEmployee(Employee employee, HttpSession session) {
+        HashMap<String, Object> result = new HashMap<>();
+        Employee curUser = (Employee) session.getAttribute(UserSession.USER_SESSION);
+        logger.info("/employee_save ===> 管理员[" + curUser.getUsername() + "]在新增员工");
+
+        try {
+            employee.setPassword("666666");
+            employee.setState(true);
+            employee.setAdmin(false);
+            employeeService.insert(employee);
+            result.put("success", true);
+            result.put("msg", "保存成功");
+        } catch (Exception e) {
+            logger.error("/employee_save ===> 新增员工异常：" + e );
+            result.put("success", false);
+            result.put("msg", "保存失败，请联系管理员");
+        }
+
+        return result;
     }
 
 

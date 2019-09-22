@@ -22,10 +22,10 @@
   </delete>
   <insert id="insert" parameterType="com.prince.crm.domain.Employee" useGeneratedKeys="true" keyProperty="id" >
     insert into employee (username, realname, password, 
-      tel, email, dept_id, 
+      tel, email, dept_id,
       inputtime, state, admin)
     values (#{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{deptId,jdbcType=BIGINT}, 
+      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{dept.id,jdbcType=BIGINT},
       #{inputtime,jdbcType=DATE}, #{state,jdbcType=BIT}, #{admin,jdbcType=BIT})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Employee" >
@@ -35,7 +35,7 @@
       password = #{password,jdbcType=VARCHAR},
       tel = #{tel,jdbcType=VARCHAR},
       email = #{email,jdbcType=VARCHAR},
-      dept_id = #{deptId,jdbcType=BIGINT},
+      dept_id = #{dept.id,jdbcType=BIGINT},
       inputtime = #{inputtime,jdbcType=DATE},
       state = #{state,jdbcType=BIT},
       admin = #{admin,jdbcType=BIT}
