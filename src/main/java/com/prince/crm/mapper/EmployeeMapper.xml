@@ -57,7 +57,13 @@
   </select>
 
   <sql id="where_sql">
-
+    <where>
+      <if test="keyWord != null">
+        (
+            username like concat('%', #{keyWord}, '%')
+        )
+      </if>
+    </where>
   </sql>
 
   <!-- 查询总数 -->
