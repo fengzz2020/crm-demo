@@ -73,8 +73,19 @@ public class EmployeeController {
      * @param employee 员工信息
      */
     @RequestMapping("/employee_update")
-    public void updateEmployee(Employee employee) {
-        employeeService.updateByPrimaryKey(employee);
+    public Map<String, Object> updateEmployee(Employee employee) {
+        HashMap<String, Object> result = new HashMap<>();
+        try {
+            employeeService.updateByPrimaryKey(employee);
+            result.put("success", true);
+            result.put("msg", "更新成功");
+        } catch (Exception e) {
+            logger.info("/employee_update ===> 更新员工信息异常：" + e);
+            result.put("success", false);
+            result.put("msg", "更新失败，请联系管理员");
+        }
+
+        return result;
     }
 
     /**

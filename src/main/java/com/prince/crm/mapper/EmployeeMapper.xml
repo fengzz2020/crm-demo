@@ -30,16 +30,16 @@
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Employee" >
     update employee
-    set username = #{username,jdbcType=VARCHAR},
-      realname = #{realname,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      tel = #{tel,jdbcType=VARCHAR},
-      email = #{email,jdbcType=VARCHAR},
-      dept_id = #{dept.id,jdbcType=BIGINT},
-      inputtime = #{inputtime,jdbcType=DATE},
-      state = #{state,jdbcType=BIT},
-      admin = #{admin,jdbcType=BIT}
-    where id = #{id,jdbcType=BIGINT}
+    set username = #{username},
+        realname = #{realname},
+        password = #{password},
+        tel = #{tel},
+        email = #{email},
+        dept_id = #{dept.id},
+        inputtime = #{inputtime},
+        state = #{state},
+        admin = #{admin}
+    where id = #{id}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, username, realname, password, tel, email, dept_id, inputtime, state, admin
