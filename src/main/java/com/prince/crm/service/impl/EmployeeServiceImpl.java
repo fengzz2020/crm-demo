@@ -68,4 +68,9 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         return new EmployeeQueryResult(totalEmployees, employeeList);
     }
+
+    @Override
+    public void updateState(Long id) {
+        employeeDao.updateState(id);
+    }
 }

@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="crm@localhost">
-  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.3">
+  <database-model serializer="dbm" dbms="MYSQL" family-id="MYSQL" format-version="4.16">
     <root id="1"/>
     <schema id="2" parent="1" name="crm">
       <Current>1</Current>
-      <Visible>1</Visible>
     </schema>
     <schema id="3" parent="1" name="bos"/>
     <schema id="4" parent="1" name="ecommerce"/>
@@ -19,29 +18,29 @@
     <table id="13" parent="2" name="employee"/>
     <column id="14" parent="12" name="id">
       <Position>1</Position>
-      <DataType>bigint(20)|0</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="15" parent="12" name="sn">
       <Position>2</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>varchar(50)|0s</DataType>
     </column>
     <column id="16" parent="12" name="name">
       <Position>3</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>varchar(50)|0s</DataType>
     </column>
     <column id="17" parent="12" name="mananger_id">
       <Position>4</Position>
-      <DataType>bigint(20)|0</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </column>
     <column id="18" parent="12" name="parent_id">
       <Position>5</Position>
-      <DataType>bigint(20)|0</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </column>
     <column id="19" parent="12" name="state">
       <Position>6</Position>
-      <DataType>tinyint(1)|0</DataType>
+      <DataType>tinyint(1)|0s</DataType>
     </column>
     <key id="20" parent="12" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
@@ -50,45 +49,45 @@
     </key>
     <column id="21" parent="13" name="id">
       <Position>1</Position>
-      <DataType>bigint(20)|0</DataType>
+      <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
     <column id="22" parent="13" name="username">
       <Position>2</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>varchar(50)|0s</DataType>
     </column>
     <column id="23" parent="13" name="realname">
       <Position>3</Position>
-      <DataType>varchar(50)|0</DataType>
+      <DataType>varchar(50)|0s</DataType>
     </column>
     <column id="24" parent="13" name="password">
       <Position>4</Position>
-      <DataType>varchar(100)|0</DataType>
+      <DataType>varchar(100)|0s</DataType>
     </column>
     <column id="25" parent="13" name="tel">
       <Position>5</Position>
-      <DataType>varchar(13)|0</DataType>
+      <DataType>varchar(13)|0s</DataType>
     </column>
     <column id="26" parent="13" name="email">
       <Position>6</Position>
-      <DataType>varchar(100)|0</DataType>
+      <DataType>varchar(100)|0s</DataType>
     </column>
     <column id="27" parent="13" name="dept_id">
       <Position>7</Position>
-      <DataType>bigint(20)|0</DataType>
+      <DataType>bigint(20)|0s</DataType>
     </column>
     <column id="28" parent="13" name="inputtime">
       <Position>8</Position>
-      <DataType>date|0</DataType>
+      <DataType>date|0s</DataType>
     </column>
     <column id="29" parent="13" name="state">
       <Position>9</Position>
-      <DataType>tinyint(1)|0</DataType>
+      <DataType>tinyint(1)|0s</DataType>
     </column>
     <column id="30" parent="13" name="admin">
       <Position>10</Position>
-      <DataType>tinyint(1)|0</DataType>
+      <DataType>tinyint(1)|0s</DataType>
     </column>
     <index id="31" parent="13" name="FK_dept">
       <ColNames>dept_id</ColNames>

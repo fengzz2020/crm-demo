@@ -116,5 +116,31 @@ public class EmployeeController {
         return result;
     }
 
+    /**
+     * 员工离职
+     *
+     * @param id 员工id
+     * @param session 会话
+     * @return 结果信息
+     */
+    @RequestMapping("/employee_delete")
+    @ResponseBody
+    public Map<String, Object> updateState(Long id, HttpSession session) {
+        HashMap<String, Object> result = new HashMap<>();
+        Employee curUser = (Employee) session.getAttribute(UserSession.USER_SESSION);
+        try {
+            employeeService.updateState(id);
+            logger.info("管理员【" + curUser.getUsername() + "】将员工【" + id + "】状态更新为离职");
+            result.put("success", true);
+            result.put("msg", "修改成功");
+        } catch (Exception e) {
+            result.put("success", false);
+            result.put("msg", "更新异常，请联系管理员");
+            logger.error("/employee_delete ===> " + e);
+        }
+
+        return result;
+    }
+
 
 }

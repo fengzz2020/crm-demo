@@ -28,4 +28,11 @@ public interface EmployeeService {
     Employee getUserForLogin(String username, String password);
 
     EmployeeQueryResult getEmployeeList(EmployeeQueryObject queryObject);
+
+    /**
+     * 更改员工状态为离职
+     *
+     * @param id 员工id
+     */
+    void updateState(Long id);
 }

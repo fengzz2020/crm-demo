@@ -24,4 +24,6 @@ public interface EmployeeMapper {
     Integer getTotalEmployees();
 
     List<Employee> getEmployeeList(EmployeeQueryObject queryObject);
+
+    void updateState(Long id);
 }
