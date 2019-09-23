@@ -18,6 +18,7 @@ public interface EmployeeMapper {
 
     int updateByPrimaryKey(Employee record);
 
+
     Employee getUserForLogin(@Param("username") String username, @Param("password") String password);
 
     Integer getTotalEmployees();

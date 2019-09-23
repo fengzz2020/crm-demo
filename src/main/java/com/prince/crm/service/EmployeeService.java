@@ -19,6 +19,12 @@ public interface EmployeeService {
 
     int updateByPrimaryKey(Employee record);
 
+    /**
+     * 用户登陆，根据用户名密码获取用户信息
+     * @param username 用户名
+     * @param password 密码
+     * @return 用户信息
+     */
     Employee getUserForLogin(String username, String password);
 
     EmployeeQueryResult getEmployeeList(EmployeeQueryObject queryObject);
