@@ -1,13 +1,12 @@
 package com.prince.crm.web.interceptor;
 
 import com.prince.crm.domain.Employee;
-import com.prince.crm.util.UserSession;
+import com.prince.crm.util.UserContext;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  * @Author: Prince Chen
@@ -19,7 +18,10 @@ public class LoginInceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        Employee emp = (Employee) httpServletRequest.getSession().getAttribute(UserSession.USER_SESSION);
+        // 将request设置到当前线程的ThreadLocal中，供后面的Log切面类使用
+        UserContext.setLocalRequest(httpServletRequest);
+
+        Employee emp = (Employee) httpServletRequest.getSession().getAttribute(UserContext.USER_SESSION);
         if(emp == null) {
             httpServletResponse.sendRedirect("/login.jsp");
             return false;

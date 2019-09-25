@@ -4,13 +4,15 @@ import com.prince.crm.domain.Employee;
 import com.prince.crm.page.EmployeeQueryResult;
 import com.prince.crm.query.EmployeeQueryObject;
 import com.prince.crm.service.EmployeeService;
-import com.prince.crm.util.UserSession;
+import com.prince.crm.util.UserContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,19 +33,22 @@ public class EmployeeController {
      * 登陆
      * @param username 用户名
      * @param password 密码
-     * @param session session会话
+     * @param request 请求
      * @return 结果信息
      */
     @RequestMapping("/login")
     @ResponseBody
-    public Map<String, Object> login(String username, String password, HttpSession session) {
+    public Map<String, Object> login(String username, String password, HttpServletRequest request) {
+        // 将request设置到当前线程的ThreadLocal中，供后面的Log切面类使用
+        UserContext.setLocalRequest(request);
+
         Map<String, Object> result = new HashMap<>();
         Employee employee = employeeService.getUserForLogin(username, password);
 
         if (employee != null) {
             result.put("success", true);
             result.put("msg", "登录成功");
-            session.setAttribute(UserSession.USER_SESSION, employee);
+            request.getSession().setAttribute(UserContext.USER_SESSION, employee);
             logger.info("/login ===> " + employee.getUsername() + "登录成功");
         } else {
             result.put("success", false);
@@ -97,7 +102,7 @@ public class EmployeeController {
     @ResponseBody
     public Map<String, Object> addEmployee(Employee employee, HttpSession session) {
         HashMap<String, Object> result = new HashMap<>();
-        Employee curUser = (Employee) session.getAttribute(UserSession.USER_SESSION);
+        Employee curUser = (Employee) session.getAttribute(UserContext.USER_SESSION);
         logger.info("/employee_save ===> 管理员[" + curUser.getUsername() + "]在新增员工");
 
         try {
@@ -127,7 +132,7 @@ public class EmployeeController {
     @ResponseBody
     public Map<String, Object> updateState(Long id, HttpSession session) {
         HashMap<String, Object> result = new HashMap<>();
-        Employee curUser = (Employee) session.getAttribute(UserSession.USER_SESSION);
+        Employee curUser = (Employee) session.getAttribute(UserContext.USER_SESSION);
         try {
             employeeService.updateState(id);
             logger.info("管理员【" + curUser.getUsername() + "】将员工【" + id + "】状态更新为离职");

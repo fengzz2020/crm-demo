@@ -3,7 +3,7 @@ package com.prince.crm.web.controller;
 import com.prince.crm.domain.Department;
 import com.prince.crm.domain.Employee;
 import com.prince.crm.service.DepartmentService;
-import com.prince.crm.util.UserSession;
+import com.prince.crm.util.UserContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -36,7 +36,7 @@ public class DepartmentController {
     @RequestMapping("/department_queryForEmployee")
     @ResponseBody
     public List<Department> getDepartmentList(HttpSession session) {
-        Employee curUser = (Employee) session.getAttribute(UserSession.USER_SESSION);
+        Employee curUser = (Employee) session.getAttribute(UserContext.USER_SESSION);
         logger.info("/department_queryForEmployee ===> 用户[" + curUser.getUsername() + "]查询部门列表");
         return departmentService.getDepartmentIdNames();
     }
