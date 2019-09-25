@@ -24,9 +24,9 @@
     insert into employee (username, realname, password, 
       tel, email, dept_id,
       inputtime, state, admin)
-    values (#{username,jdbcType=VARCHAR}, #{realname,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{tel,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR}, #{dept.id,jdbcType=BIGINT},
-      #{inputtime,jdbcType=DATE}, #{state,jdbcType=BIT}, #{admin,jdbcType=BIT})
+    values (#{username}, #{realname}, #{password},
+      #{tel}, #{email}, #{dept.id},
+      #{inputtime}, #{state}, #{admin})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Employee" >
     update employee
@@ -57,7 +57,13 @@
   </select>
 
   <sql id="where_sql">
-
+    <where>
+      <if test="keyWord != null">
+        (
+            username like concat('%', #{keyWord}, '%')
+        )
+      </if>
+    </where>
   </sql>
 
   <!-- 查询总数 -->
@@ -77,5 +83,10 @@
         limit #{start}, #{rows}
     </if>
   </select>
+
+  <!-- 更改员工状态为离职 -->
+  <update id="updateState" parameterType="long">
+    update employee set state = 0 where id = #{id}
+  </update>
 
 </mapper>

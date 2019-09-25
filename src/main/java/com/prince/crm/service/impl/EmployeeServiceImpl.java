@@ -57,7 +57,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public EmployeeQueryResult getEmployeeList(EmployeeQueryObject queryObject) {
 
         // 1. 查询记录总数
-        Integer totalEmployees = employeeDao.getTotalEmployees();
+        Integer totalEmployees = employeeDao.getTotalEmployees(queryObject);
 
         if (totalEmployees == null) {
             return new EmployeeQueryResult(0, Collections.EMPTY_LIST);
@@ -67,5 +67,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         List<Employee> employeeList = employeeDao.getEmployeeList(queryObject);
 
         return new EmployeeQueryResult(totalEmployees, employeeList);
+    }
+
+    @Override
+    public void updateState(Long id) {
+        employeeDao.updateState(id);
     }
 }

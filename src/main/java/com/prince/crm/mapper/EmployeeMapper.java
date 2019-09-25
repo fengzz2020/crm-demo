@@ -21,7 +21,9 @@ public interface EmployeeMapper {
 
     Employee getUserForLogin(@Param("username") String username, @Param("password") String password);
 
-    Integer getTotalEmployees();
+    Integer getTotalEmployees(EmployeeQueryObject queryObject);
 
     List<Employee> getEmployeeList(EmployeeQueryObject queryObject);
+
+    void updateState(Long id);
 }
