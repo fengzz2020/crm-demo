@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.prince.crm.mapper.EmpRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.prince.crm.domain.EmpRole" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="r_id" property="rId" jdbcType="BIGINT" />
+    <result column="e_id" property="eId" jdbcType="BIGINT" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from emp_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.prince.crm.domain.EmpRole" useGeneratedKeys="true" keyProperty="id" >
+    insert into emp_role (r_id, e_id)
+    values (#{rId,jdbcType=BIGINT}, #{eId,jdbcType=BIGINT})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.EmpRole" >
+    update emp_role
+    set r_id = #{rId,jdbcType=BIGINT},
+      e_id = #{eId,jdbcType=BIGINT}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select id, r_id, e_id
+    from emp_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, r_id, e_id
+    from emp_role
+  </select>
+</mapper>

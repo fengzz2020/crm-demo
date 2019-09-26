@@ -81,7 +81,22 @@
 				value=""/> -->
 		</javaClientGenerator>
 
-		<table tableName="log">
+		<table tableName="role">
+			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
+			<property name="constructorBased" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="permission">
+			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
+			<property name="constructorBased" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="role_permission">
+			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
+			<property name="constructorBased" value="false" />
+			<generatedKey column="id" sqlStatement="JDBC" />
+		</table>
+		<table tableName="emp_role">
 			<!-- 参考 javaModelGenerator 的 constructorBased属性 -->
 			<property name="constructorBased" value="false" />
 			<generatedKey column="id" sqlStatement="JDBC" />
