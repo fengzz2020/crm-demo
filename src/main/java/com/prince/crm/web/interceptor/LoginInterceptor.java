@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
  * @Description:
  * @Date: Create in 2019/9/22 16:20
  */
-public class LoginInceptor implements HandlerInterceptor {
+public class LoginInterceptor implements HandlerInterceptor {
 
 
     @Override
