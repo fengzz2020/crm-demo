@@ -9,8 +9,8 @@
         <module name="crm-demo" />
       </profile>
     </annotationProcessing>
-    <bytecodeTargetLevel>
-      <module name="crm-demo" target="1.7" />
+    <bytecodeTargetLevel target="7">
+      <module name="crm-demo" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>
