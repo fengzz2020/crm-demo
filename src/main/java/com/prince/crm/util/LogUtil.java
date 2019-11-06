@@ -30,7 +30,7 @@ public class LogUtil {
         log.setParams(Arrays.toString(args));
         String clszz = joinPoint.getTarget().getClass().toString();
         String method = joinPoint.getSignature().getName();
-        log.setFunction(clszz + ":" + method);
+        log.setFunc(clszz + ":" + method);
         log.setOptime(new Date());
 
         HttpServletRequest localRequest = UserContext.getLocalRequest();

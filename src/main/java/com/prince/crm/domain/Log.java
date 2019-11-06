@@ -11,7 +11,7 @@ public class Log {
 
     private String opip;
 
-    private String function;
+    private String func;
 
     private String params;
 
@@ -47,12 +47,12 @@ public class Log {
         this.opip = opip == null ? null : opip.trim();
     }
 
-    public String getFunction() {
-        return function;
+    public String getFunc() {
+        return func;
     }
 
-    public void setFunction(String function) {
-        this.function = function == null ? null : function.trim();
+    public void setFunc(String func) {
+        this.func = func == null ? null : func.trim();
     }
 
     public String getParams() {
