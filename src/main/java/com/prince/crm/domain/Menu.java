@@ -1,5 +1,7 @@
 package com.prince.crm.domain;
 
+import java.util.List;
+
 public class Menu {
     private Long id;
 
@@ -13,7 +15,7 @@ public class Menu {
 
     private String attributes;
 
-    private Long parentId;
+    private List<Menu> children;
 
     private String function;
 
@@ -65,12 +67,12 @@ public class Menu {
         this.attributes = attributes == null ? null : attributes.trim();
     }
 
-    public Long getParentId() {
-        return parentId;
+    public List<Menu> getChildren() {
+        return children;
     }
 
-    public void setParentId(Long parentId) {
-        this.parentId = parentId;
+    public void setChildren(List<Menu> children) {
+        this.children = children;
     }
 
     public String getFunction() {

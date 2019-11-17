@@ -18,33 +18,9 @@ public class MenuServiceImpl implements MenuService {
     @Autowired
     private MenuMapper menuDao;
 
-    @Override
-    public int deleteByPrimaryKey(Long id) {
-        return menuDao.deleteByPrimaryKey(id);
-    }
 
     @Override
-    public int insert(Menu record) {
-        return menuDao.insert(record);
-    }
-
-    @Override
-    public Menu selectByPrimaryKey(Long id) {
-        return menuDao.selectByPrimaryKey(id);
-    }
-
-    @Override
-    public List<Menu> selectAll() {
-        return menuDao.selectAll();
-    }
-
-    @Override
-    public int updateByPrimaryKey(Menu record) {
-        return menuDao.updateByPrimaryKey(record);
-    }
-
-    @Override
-    public List<Menu> getMenus() {
-        return menuDao.getMenus();
+    public List<Menu> queryForMenu() {
+        return menuDao.queryForMenu();
     }
 }

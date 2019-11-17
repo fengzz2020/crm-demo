@@ -1,6 +1,6 @@
 $(function(){
 	$("#menuTree").tree({
-		url:'/listMenus',
+		url:'/queryForMenu',
 		onClick:function(node){
 			if (node.attributes) {
 				node.attributes = $.parseJSON(node.attributes);

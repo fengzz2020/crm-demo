@@ -8,45 +8,15 @@
         <result column="checked" jdbcType="BIT" property="checked"/>
         <result column="state" jdbcType="VARCHAR" property="state"/>
         <result column="attributes" jdbcType="VARCHAR" property="attributes"/>
-        <result column="parent_id" jdbcType="BIGINT" property="parentId"/>
         <result column="function" jdbcType="VARCHAR" property="function"/>
+        <collection property="children" ofType="com.prince.crm.domain.Menu" column="id" select="com.prince.crm.mapper.MenuMapper.queryByParentId"></collection>
     </resultMap>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-        delete from menu
-        where id = #{id,jdbcType=BIGINT}
-    </delete>
-    <insert id="insert" keyProperty="id" parameterType="com.prince.crm.domain.Menu" useGeneratedKeys="true">
-        insert into menu (text, iconCls, checked, 
-          state, attributes, parent_id, 
-          function)
-        values (#{text,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, #{checked,jdbcType=BIT}, 
-          #{state,jdbcType=VARCHAR}, #{attributes,jdbcType=VARCHAR}, #{parentId,jdbcType=BIGINT}, 
-          #{function,jdbcType=VARCHAR})
-    </insert>
-    <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Menu">
-        update menu
-        set text = #{text,jdbcType=VARCHAR},
-          iconCls = #{iconcls,jdbcType=VARCHAR},
-          checked = #{checked,jdbcType=BIT},
-          state = #{state,jdbcType=VARCHAR},
-          attributes = #{attributes,jdbcType=VARCHAR},
-          parent_id = #{parentId,jdbcType=BIGINT},
-          function = #{function,jdbcType=VARCHAR}
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select id, text, iconCls, checked, state, attributes, parent_id, function
-        from menu
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <select id="selectAll" resultMap="BaseResultMap">
-        select id, text, iconCls, checked, state, attributes, parent_id, function
-        from menu
-    </select>
 
-    <!-- 查询菜单 -->
-    <select id="getMenus" resultMap="BaseResultMap">
-        select id, text from menu where parent_id = 0
+    <select id="queryForMenu" resultMap="BaseResultMap">
+        select * from menu where parent_id = 0
+    </select>
+    <select id="queryByParentId" resultMap="BaseResultMap">
+        select * from menu where parent_id = #{pid}
     </select>
 
 </mapper>
