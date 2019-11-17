@@ -42,4 +42,9 @@ public class MenuServiceImpl implements MenuService {
     public int updateByPrimaryKey(Menu record) {
         return menuDao.updateByPrimaryKey(record);
     }
+
+    @Override
+    public List<Menu> getMenus() {
+        return menuDao.getMenus();
+    }
 }

@@ -8,8 +8,11 @@
     
     <!-- 开启注解扫描 -->
     <!--<context:component-scan base-package="com.prince.crm" />-->
-    
-    <!-- 支持注解驱动 -->
+
+    <!-- springMVC的三大组件：处理器映射器、处理器适配器、视图解析器
+        下面这个mvc:annotation-driven标签相当于配置了RequestMappingHandlerMapping和RequestMappingHandlerAdapter
+    -->
+    <!-- 配置注解驱动 -->
     <mvc:annotation-driven/>
     <!-- 静态资源(css, js等)交给Tomcat处理-->
     <mvc:default-servlet-handler/>

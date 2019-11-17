@@ -1,9 +1,16 @@
-package com.prince.crm.mapper;
+package com.prince.crm.service;
 
 import com.prince.crm.domain.Permission;
+
 import java.util.List;
 
-public interface PermissionMapper {
+/**
+ * @Description TODO
+ * @Author prince Chen
+ * @Date 2019/11/16 21:29
+ */
+
+public interface PermissionService {
     int deleteByPrimaryKey(Long id);
 
     int insert(Permission record);

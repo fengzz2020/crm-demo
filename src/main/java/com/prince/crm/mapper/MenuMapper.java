@@ -13,4 +13,7 @@ public interface MenuMapper {
     List<Menu> selectAll();
 
     int updateByPrimaryKey(Menu record);
+
+    List<Menu> getMenus();
+
 }

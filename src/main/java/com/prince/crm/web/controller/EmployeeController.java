@@ -1,9 +1,11 @@
 package com.prince.crm.web.controller;
 
 import com.prince.crm.domain.Employee;
+import com.prince.crm.domain.Permission;
 import com.prince.crm.page.EmployeeQueryResult;
 import com.prince.crm.query.EmployeeQueryObject;
 import com.prince.crm.service.EmployeeService;
+import com.prince.crm.service.PermissionService;
 import com.prince.crm.util.UserContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,8 +16,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: Prince Chen
@@ -28,12 +29,20 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService employeeService;
+    @Autowired
+    private PermissionService permissionService;
+
+    @RequestMapping("/employee")
+    public String index() {
+        return "employee";
+    }
 
     /**
      * 登陆
+     *
      * @param username 用户名
      * @param password 密码
-     * @param request 请求
+     * @param request  请求
      * @return 结果信息
      */
     @RequestMapping("/login")
@@ -48,7 +57,14 @@ public class EmployeeController {
         if (employee != null) {
             result.put("success", true);
             result.put("msg", "登录成功");
+
+            // put user info to session
             request.getSession().setAttribute(UserContext.USER_SESSION, employee);
+            // put user permissions to session
+            List<String> permissions = permissionService.queryResourceById(employee.getId());
+            logger.info("===> 用户的【" + employee + "】的所有url权限是[" + permissions + "]");
+            request.getSession().setAttribute(UserContext.PERMISSION_IN_SESSION, permissions);
+
             logger.info("/login ===> " + employee.getUsername() + "登录成功");
         } else {
             result.put("success", false);
@@ -67,7 +83,7 @@ public class EmployeeController {
      */
     @RequestMapping("/employee_list")
     @ResponseBody
-    public EmployeeQueryResult queryEmployList(EmployeeQueryObject queryObject) {
+    public EmployeeQueryResult list(EmployeeQueryObject queryObject) {
 
         return employeeService.getEmployeeList(queryObject);
     }
@@ -78,7 +94,7 @@ public class EmployeeController {
      * @param employee 员工信息
      */
     @RequestMapping("/employee_update")
-    public Map<String, Object> updateEmployee(Employee employee) {
+    public Map<String, Object> update(Employee employee) {
         HashMap<String, Object> result = new HashMap<>();
         try {
             employeeService.updateByPrimaryKey(employee);
@@ -100,7 +116,7 @@ public class EmployeeController {
      */
     @RequestMapping("/employee_save")
     @ResponseBody
-    public Map<String, Object> addEmployee(Employee employee, HttpSession session) {
+    public Map<String, Object> save(Employee employee, HttpSession session) {
         HashMap<String, Object> result = new HashMap<>();
         Employee curUser = (Employee) session.getAttribute(UserContext.USER_SESSION);
         logger.info("/employee_save ===> 管理员[" + curUser.getUsername() + "]在新增员工");
@@ -113,7 +129,7 @@ public class EmployeeController {
             result.put("success", true);
             result.put("msg", "保存成功");
         } catch (Exception e) {
-            logger.error("/employee_save ===> 新增员工异常：" + e );
+            logger.error("/employee_save ===> 新增员工异常：" + e);
             result.put("success", false);
             result.put("msg", "保存失败，请联系管理员");
         }
@@ -124,13 +140,13 @@ public class EmployeeController {
     /**
      * 员工离职
      *
-     * @param id 员工id
+     * @param id      员工id
      * @param session 会话
      * @return 结果信息
      */
     @RequestMapping("/employee_delete")
     @ResponseBody
-    public Map<String, Object> updateState(Long id, HttpSession session) {
+    public Map<String, Object> delete(Long id, HttpSession session) {
         HashMap<String, Object> result = new HashMap<>();
         Employee curUser = (Employee) session.getAttribute(UserContext.USER_SESSION);
         try {

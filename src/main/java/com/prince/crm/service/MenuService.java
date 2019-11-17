@@ -19,4 +19,6 @@ public interface MenuService {
     List<Menu> selectAll();
 
     int updateByPrimaryKey(Menu record);
+
+    List<Menu> getMenus();
 }

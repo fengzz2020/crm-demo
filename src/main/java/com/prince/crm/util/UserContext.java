@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class UserContext {
     public static final String USER_SESSION = "CRM_USER_SESSION";
+    public static final String PERMISSION_IN_SESSION = "PERMISSION_IN_SESSION";
+
     private static ThreadLocal<HttpServletRequest> local = new ThreadLocal<>();
 
     public static HttpServletRequest getLocalRequest() {

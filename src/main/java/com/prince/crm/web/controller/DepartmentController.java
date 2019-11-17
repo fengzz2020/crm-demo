@@ -28,6 +28,12 @@ public class DepartmentController {
     @Autowired
     private DepartmentService departmentService;
 
+
+    @RequestMapping("/department")
+    public String index() {
+        return "department";
+    }
+
     /**
      * 查询部门（id, name）列表
      *

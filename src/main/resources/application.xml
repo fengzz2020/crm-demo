@@ -52,6 +52,7 @@
     <!-- 5.AOP相关配置 -->
     <aop:config>
         <aop:pointcut id="crudPointcut" expression="execution(* com.prince.crm.service.*Service.*(..))"/>
+        <!-- 给service中的方法都加上事务 -->
         <aop:advisor advice-ref="advice" pointcut-ref="crudPointcut"/>
         <!-- 定义切面 -->
         <aop:aspect ref="logAspect">
@@ -60,7 +61,7 @@
         </aop:aspect>
     </aop:config>
 
-    <!-- 6.开启注解扫描 -->
+    <!-- 6.开启注解扫描，扫描所有的类，controller、service -->
     <context:component-scan base-package="com.prince.crm"/>
 
     <!-- 7.mapper接口扫描 -->

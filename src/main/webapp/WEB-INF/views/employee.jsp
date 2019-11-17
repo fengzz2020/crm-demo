@@ -17,7 +17,7 @@
             <a class="easyui-linkbutton" iconCls="icon-add" plain="true" data-cmd="add">新增</a>
         </c:if>
             <a id="emp_datagrid_edit" class="easyui-linkbutton" iconCls="icon-edit" plain="true" data-cmd="edit">编辑</a>
-        <c:if test="${myFn:checkPermission('com._520it.crm.web.controller.EmployeeController:delete')}">
+        <c:if test="${myFn:checkPermission('com.prince.crm.web.controller.EmployeeController:delete')}">
             <a id="emp_datagrid_del" class="easyui-linkbutton" iconCls="icon-remove" plain="true" data-cmd="del">离职</a>
         </c:if>
         <a class="easyui-linkbutton" iconCls="icon-reload" plain="true" data-cmd="reload">刷新</a>

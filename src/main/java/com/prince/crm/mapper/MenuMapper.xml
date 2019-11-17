@@ -44,4 +44,9 @@
         from menu
     </select>
 
+    <!-- 查询菜单 -->
+    <select id="getMenus" resultMap="BaseResultMap">
+        select id, text from menu where parent_id = 0
+    </select>
+
 </mapper>
