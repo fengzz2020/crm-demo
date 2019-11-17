@@ -1,8 +1,10 @@
 package com.prince.crm.util;
 
 import com.prince.crm.domain.Employee;
+import com.prince.crm.domain.Menu;
 import com.prince.crm.domain.Permission;
 import com.prince.crm.service.PermissionService;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -20,6 +22,34 @@ public class PermissionUtil {
     private static Logger logger = Logger.getLogger(PermissionUtil.class);
 
     private static PermissionService permissionService;
+
+    /**
+     * 根据用户权限，筛选出用户能访问的菜单
+     * @param menus 所有菜单
+     */
+    public static void checkMenuPermission(List<Menu> menus) {
+        // 用户所拥有的权限
+        List<String> userPermission = (List<String>) UserContext.getLocalRequest().getSession().getAttribute(UserContext.PERMISSION_IN_SESSION);
+
+        // 遍历菜单，比对用户权限，去掉用户无权限的菜单
+        for (int i=0; i<menus.size(); i++) {
+            String menuPermission = menus.get(i).getFunction();
+            // function 不为空，说明需要权限才能访问
+            if (StringUtils.isNotBlank(menuPermission)) {
+                if (!userPermission.contains(menuPermission)){
+                    menus.remove(i);
+                    // 注意，如果是从前往后遍历，一定要i--， 为何？？？
+                    i--;
+                }
+            }
+
+            // 递归检测子菜单
+            List<Menu> children = menus.get(i).getChildren();
+            if(!children.isEmpty()) {
+                checkMenuPermission(children);
+            }
+        }
+    }
 
     @Autowired
     public void setPermissionService(PermissionService permissionService) {

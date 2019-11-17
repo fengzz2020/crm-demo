@@ -82,4 +82,18 @@ public class Menu {
     public void setFunction(String function) {
         this.function = function == null ? null : function.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", text='" + text + '\'' +
+                ", iconcls='" + iconcls + '\'' +
+                ", checked=" + checked +
+                ", state='" + state + '\'' +
+                ", attributes='" + attributes + '\'' +
+                ", children=" + children +
+                ", function='" + function + '\'' +
+                '}';
+    }
 }

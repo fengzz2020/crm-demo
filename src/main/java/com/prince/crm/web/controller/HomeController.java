@@ -2,6 +2,7 @@ package com.prince.crm.web.controller;
 
 import com.prince.crm.domain.Menu;
 import com.prince.crm.service.MenuService;
+import com.prince.crm.util.UserContext;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -28,6 +29,6 @@ public class HomeController {
     @RequestMapping("/queryForMenu")
     @ResponseBody
     public List<Menu> queryForMenu() {
-        return menuService.queryForMenu();
+        return (List<Menu>) UserContext.getLocalRequest().getSession().getAttribute(UserContext.MENU_IN_SESSION);
     }
 }

@@ -1,11 +1,14 @@
 package com.prince.crm.web.controller;
 
 import com.prince.crm.domain.Employee;
+import com.prince.crm.domain.Menu;
 import com.prince.crm.domain.Permission;
 import com.prince.crm.page.EmployeeQueryResult;
 import com.prince.crm.query.EmployeeQueryObject;
 import com.prince.crm.service.EmployeeService;
+import com.prince.crm.service.MenuService;
 import com.prince.crm.service.PermissionService;
+import com.prince.crm.util.PermissionUtil;
 import com.prince.crm.util.UserContext;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
     @Autowired
     private PermissionService permissionService;
+    @Autowired
+    private MenuService menuService;
 
     @RequestMapping("/employee")
     public String index() {
@@ -64,6 +69,14 @@ public class EmployeeController {
             List<String> permissions = permissionService.queryResourceById(employee.getId());
             logger.info("===> 用户的【" + employee + "】的所有url权限是[" + permissions + "]");
             request.getSession().setAttribute(UserContext.PERMISSION_IN_SESSION, permissions);
+
+            // 将用户的菜单存入session
+            // 1, 查询出所有菜单
+            // 2，根据当前用户所拥有的权限，筛选出用户专属菜单
+            List<Menu> menus = menuService.queryForMenu();
+            PermissionUtil.checkMenuPermission(menus);
+            logger.info("===> 用户【" + employee + "】可以访问的菜单有：" + menus);
+            request.getSession().setAttribute(UserContext.MENU_IN_SESSION, menus);
 
             logger.info("/login ===> " + employee.getUsername() + "登录成功");
         } else {
