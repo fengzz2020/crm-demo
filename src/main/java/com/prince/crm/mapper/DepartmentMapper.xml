@@ -10,36 +10,36 @@
         <result column="state" property="state" jdbcType="BIT"/>
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-      delete from department
-      where id = #{id,jdbcType=BIGINT}
+          delete from department
+          where id = #{id}
     </delete>
     <insert id="insert" parameterType="com.prince.crm.domain.Department" useGeneratedKeys="true" keyProperty="id">
-      insert into department (sn, name, mananger_id, 
-        parent_id, state)
-      values (#{sn,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{manangerId,jdbcType=BIGINT}, 
-        #{parentId,jdbcType=BIGINT}, #{state,jdbcType=BIT})
+          insert into department (sn, name, mananger_id,
+            parent_id, state)
+          values (#{sn}, #{name}, #{manangerId},
+            #{parentId}, #{state})
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Department">
-      update department
-      set sn = #{sn,jdbcType=VARCHAR},
-        name = #{name,jdbcType=VARCHAR},
-        mananger_id = #{manangerId,jdbcType=BIGINT},
-        parent_id = #{parentId,jdbcType=BIGINT},
-        state = #{state,jdbcType=BIT}
-      where id = #{id,jdbcType=BIGINT}
+          update department
+          set sn = #{sn},
+            name = #{name},
+            mananger_id = #{manangerId},
+            parent_id = #{parentId},
+            state = #{state}
+          where id = #{id}
     </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
-      select id, sn, name, mananger_id, parent_id, state
-      from department
-      where id = #{id,jdbcType=BIGINT}
+          select id, sn, name, mananger_id, parent_id, state
+          from department
+          where id = #{id}
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
-      select id, sn, name, mananger_id, parent_id, state
-      from department
+          select id, sn, name, mananger_id, parent_id, state
+          from department
     </select>
 
     <!-- 查询部门的（id, name）列表-->
     <select id="getDepartmentIdNames" resultType="com.prince.crm.domain.Department">
-      select id, name from department
+        select id, name from department
     </select>
 </mapper>

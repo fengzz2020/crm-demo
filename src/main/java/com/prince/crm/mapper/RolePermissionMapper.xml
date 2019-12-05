@@ -8,22 +8,22 @@
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from role_permission
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </delete>
   <insert id="insert" parameterType="com.prince.crm.domain.RolePermission" useGeneratedKeys="true" keyProperty="id" >
     insert into role_permission (r_id, p_id)
-    values (#{rId,jdbcType=BIGINT}, #{pId,jdbcType=BIGINT})
+    values (#{rId}, #{pId})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.RolePermission" >
     update role_permission
-    set r_id = #{rId,jdbcType=BIGINT},
-      p_id = #{pId,jdbcType=BIGINT}
-    where id = #{id,jdbcType=BIGINT}
+    set r_id = #{rId},
+      p_id = #{pId}
+    where id = #{id}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, r_id, p_id
     from role_permission
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, r_id, p_id

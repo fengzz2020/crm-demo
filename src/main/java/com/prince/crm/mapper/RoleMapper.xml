@@ -8,22 +8,22 @@
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
     delete from role
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </delete>
   <insert id="insert" parameterType="com.prince.crm.domain.Role" useGeneratedKeys="true" keyProperty="id" >
     insert into role (name, sn)
-    values (#{name,jdbcType=VARCHAR}, #{sn,jdbcType=VARCHAR})
+    values (#{name}, #{sn})
   </insert>
   <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Role" >
     update role
-    set name = #{name,jdbcType=VARCHAR},
-      sn = #{sn,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=BIGINT}
+    set name = #{name},
+      sn = #{sn}
+    where id = #{id}
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     select id, name, sn
     from role
-    where id = #{id,jdbcType=BIGINT}
+    where id = #{id}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select id, name, sn

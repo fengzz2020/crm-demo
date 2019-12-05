@@ -14,7 +14,7 @@
     </resultMap>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
       delete from log
-      where id = #{id,jdbcType=BIGINT}
+      where id = #{id}
     </delete>
     <insert id="insert" parameterType="com.prince.crm.domain.Log" useGeneratedKeys="true" keyProperty="id">
         insert into log (opUser_id, opTime, opIp,
@@ -24,17 +24,17 @@
     </insert>
     <update id="updateByPrimaryKey" parameterType="com.prince.crm.domain.Log">
       update log
-      set opUser_id = #{opuserId,jdbcType=BIGINT},
-        opTime = #{optime,jdbcType=TIMESTAMP},
-        opIp = #{opip,jdbcType=VARCHAR},
-        func = #{func,jdbcType=VARCHAR},
-        params = #{params,jdbcType=VARCHAR}
-      where id = #{id,jdbcType=BIGINT}
+      set opUser_id = #{opuserId},
+        opTime = #{optime},
+        opIp = #{opip},
+        func = #{func},
+        params = #{params}
+      where id = #{id}
     </update>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
       select id, opUser_id, opTime, opIp, func, params
       from log
-      where id = #{id,jdbcType=BIGINT}
+      where id = #{id}
     </select>
     <select id="selectAll" resultMap="BaseResultMap">
       select id, opUser_id, opTime, opIp, func, params
